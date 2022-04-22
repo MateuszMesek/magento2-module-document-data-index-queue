@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/topology.xsd">
+    <exchange name="magento" connection="amqp">
+        <binding id="document_data.indexer" topic="document_data.indexer.#" destinationType="queue" destination="document_data.indexer"/>
+        <binding id="document_data.sync" topic="document_data.sync.#" destinationType="queue" destination="document_data.sync"/>
+    </exchange>
+</config>
