@@ -86,6 +86,16 @@
             <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName\Indexer</argument>
         </arguments>
     </virtualType>
+    <type name="MateuszMesek\DocumentDataIndexMview\Action">
+        <arguments>
+            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\IndexerMview</argument>
+        </arguments>
+    </type>
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\IndexerMview" type="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer">
+        <arguments>
+            <argument name="publisher" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Publisher\Indexer</argument>
+        </arguments>
+    </virtualType>
     <virtualType name="MateuszMesek\DocumentDataIndexSync\IndexerAction">
         <arguments>
             <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\Sync</argument>
@@ -99,6 +109,16 @@
     <virtualType name="MateuszMesek\DocumentDataIndexQueue\Publisher\Sync" type="MateuszMesek\DocumentDataIndexQueue\Publisher">
         <arguments>
             <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName\Sync</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="KMK\DocumentDataIndexSync\MviewAction">
+        <arguments>
+            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\SyncMview</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\SyncMview" type="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer">
+        <arguments>
+            <argument name="publisher" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Publisher\Sync</argument>
         </arguments>
     </virtualType>
     <!-- consumer -->
