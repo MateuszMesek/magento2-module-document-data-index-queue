@@ -15,6 +15,6 @@ class GetTopicName
 
     public function execute(string $indexName): string
     {
-        return $this->namespace.'.'.str_replace('_', '.', $indexName);
+        return $this->namespace.'.'.$indexName;
     }
 }
