@@ -83,6 +83,11 @@
     </virtualType>
     <virtualType name="MateuszMesek\DocumentDataIndexQueue\Publisher\Indexer" type="MateuszMesek\DocumentDataIndexQueue\Publisher">
         <arguments>
+            <argument name="topicNameResolver" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\TopicNameResolver\Indexer</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\TopicNameResolver\Indexer" type="MateuszMesek\DocumentDataIndexQueue\TopicNameResolver">
+        <arguments>
             <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName\Indexer</argument>
         </arguments>
     </virtualType>
@@ -107,6 +112,11 @@
         </arguments>
     </virtualType>
     <virtualType name="MateuszMesek\DocumentDataIndexQueue\Publisher\Sync" type="MateuszMesek\DocumentDataIndexQueue\Publisher">
+        <arguments>
+            <argument name="topicNameResolver" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\TopicNameResolver\Sync</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\TopicNameResolver\Sync" type="MateuszMesek\DocumentDataIndexQueue\TopicNameResolver">
         <arguments>
             <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName\Sync</argument>
         </arguments>

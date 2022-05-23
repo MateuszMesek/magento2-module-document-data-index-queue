@@ -3,36 +3,31 @@
 namespace MateuszMesek\DocumentDataIndexQueue;
 
 use Magento\Framework\MessageQueue\PublisherInterface as MessageQueuePublisherInterface;
-use MateuszMesek\DocumentDataIndexIndexerApi\IndexNameResolverInterface;
-use MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName;
 use MateuszMesek\DocumentDataIndexQueue\Data\MessageFactory;
 use MateuszMesek\DocumentDataIndexQueueApi\PublisherInterface;
+use MateuszMesek\DocumentDataIndexQueueApi\TopicNameResolverInterface;
 use Traversable;
 
 class Publisher implements PublisherInterface
 {
-    private IndexNameResolverInterface $indexNameResolver;
-    private GetTopicName $getTopicName;
+    private TopicNameResolverInterface $topicNameResolver;
     private MessageFactory $messageFactory;
     private MessageQueuePublisherInterface $publisher;
 
     public function __construct(
-        IndexNameResolverInterface $indexNameResolver,
-        GetTopicName $getTopicName,
+        TopicNameResolverInterface $topicNameResolver,
         MessageFactory $messageFactory,
         MessageQueuePublisherInterface $publisher
     )
     {
-        $this->indexNameResolver = $indexNameResolver;
-        $this->getTopicName = $getTopicName;
+        $this->topicNameResolver = $topicNameResolver;
         $this->messageFactory = $messageFactory;
         $this->publisher = $publisher;
     }
 
     public function publish(array $dimensions, Traversable $entityIds): void
     {
-        $indexName = $this->indexNameResolver->resolve($dimensions);
-        $topicName = $this->getTopicName->execute($indexName);
+        $topicName = $this->topicNameResolver->resolve($dimensions);
 
         foreach ($entityIds as $entityId) {
             $message = $this->messageFactory->create([
