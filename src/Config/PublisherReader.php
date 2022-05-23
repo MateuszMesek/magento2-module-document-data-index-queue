@@ -4,23 +4,23 @@ namespace MateuszMesek\DocumentDataIndexQueue\Config;
 
 use Magento\Framework\Config\ReaderInterface;
 use MateuszMesek\DocumentDataApi\Config\DocumentNamesInterface as ConfigInterface;
-use MateuszMesek\DocumentDataIndexIndexer\IndexNamesProviderFactory;
 use MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName;
+use MateuszMesek\DocumentDataIndexQueue\TopicNamesProviderFactory;
 
 class PublisherReader implements ReaderInterface
 {
     private ConfigInterface $config;
-    private IndexNamesProviderFactory $indexNamesProviderFactory;
+    private TopicNamesProviderFactory $topicNamesProviderFactory;
     private GetTopicName $getTopicName;
 
     public function __construct(
         ConfigInterface           $config,
-        IndexNamesProviderFactory $indexNamesProviderFactory,
+        TopicNamesProviderFactory $topicNamesProviderFactory,
         GetTopicName              $getTopicName
     )
     {
         $this->config = $config;
-        $this->indexNamesProviderFactory = $indexNamesProviderFactory;
+        $this->topicNamesProviderFactory = $topicNamesProviderFactory;
         $this->getTopicName = $getTopicName;
     }
 
@@ -29,10 +29,10 @@ class PublisherReader implements ReaderInterface
         $topics = [];
 
         foreach ($this->config->getDocumentNames() as $documentName) {
-            $indexNamesProvider = $this->indexNamesProviderFactory->create($documentName);
+            $topicNamesProvider = $this->topicNamesProviderFactory->create($documentName);
 
-            foreach ($indexNamesProvider->getIndexNames() as $indexName) {
-                $topicName = $this->getTopicName->execute($indexName);
+            foreach ($topicNamesProvider->getTopicNames() as $topicName) {
+                $topicName = $this->getTopicName->execute($topicName);
 
                 $topics[$topicName] = [
                     'topic' => $topicName,

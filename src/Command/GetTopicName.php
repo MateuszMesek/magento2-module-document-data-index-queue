@@ -13,8 +13,8 @@ class GetTopicName
         $this->namespace = $namespace;
     }
 
-    public function execute(string $indexName): string
+    public function execute(string $topicName): string
     {
-        return $this->namespace.'.'.$indexName;
+        return $this->namespace.'.'.$topicName;
     }
 }

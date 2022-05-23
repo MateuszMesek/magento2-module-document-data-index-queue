@@ -3,6 +3,7 @@
     <module name="MateuszMesek_DocumentDataIndexQueue">
         <sequence>
             <module name="Magento_MessageQueue"/>
+            <module name="MateuszMesek_DocumentDataIndexIndexer"/>
             <module name="MateuszMesek_DocumentDataIndexIndexerApi"/>
             <module name="MateuszMesek_DocumentDataIndexSync"/>
         </sequence>

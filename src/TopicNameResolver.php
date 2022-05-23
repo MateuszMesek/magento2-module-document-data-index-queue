@@ -2,28 +2,27 @@
 
 namespace MateuszMesek\DocumentDataIndexQueue;
 
-use MateuszMesek\DocumentDataIndexIndexerApi\IndexNameResolverInterface;
-use MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName;
+use MateuszMesek\DocumentDataIndexIndexerApi\DimensionResolverInterface;
 use MateuszMesek\DocumentDataIndexQueueApi\TopicNameResolverInterface;
 
 class TopicNameResolver implements TopicNameResolverInterface
 {
-    private IndexNameResolverInterface $indexNameResolver;
-    private GetTopicName $getTopicName;
+    private DimensionResolverInterface $documentNameResolver;
+    private TopicNameResolverFactory $topicNameResolverFactory;
 
     public function __construct(
-        IndexNameResolverInterface $indexNameResolver,
-        GetTopicName $getTopicName
+        DimensionResolverInterface $documentNameResolver,
+        TopicNameResolverFactory $topicNameResolverFactory
     )
     {
-        $this->indexNameResolver = $indexNameResolver;
-        $this->getTopicName = $getTopicName;
+        $this->documentNameResolver = $documentNameResolver;
+        $this->topicNameResolverFactory = $topicNameResolverFactory;
     }
 
     public function resolve(array $dimensions): string
     {
-        $indexName = $this->indexNameResolver->resolve($dimensions);
+        $documentName = $this->documentNameResolver->resolve($dimensions);
 
-        return $this->getTopicName->execute($indexName);
+        return $this->topicNameResolverFactory->get($documentName)->resolve($dimensions);
     }
 }
