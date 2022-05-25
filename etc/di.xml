@@ -176,14 +176,31 @@
         </arguments>
     </virtualType>
     <!-- consumer -->
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Consumer\DimensionalIndexer" type="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\Fallback">
+        <arguments>
+            <argument name="message" xsi:type="string">Consumer was fail. Message will be published again.</argument>
+        </arguments>
+    </virtualType>
     <virtualType name="MateuszMesek\DocumentDataIndexQueue\Consumer\Indexer" type="MateuszMesek\DocumentDataIndexQueue\Consumer">
         <arguments>
-            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\DimensionalIndexer</argument>
+            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Consumer\Indexer\DimensionalIndexer</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Consumer\Indexer\DimensionalIndexer" type="MateuszMesek\DocumentDataIndexQueue\Consumer\DimensionalIndexer">
+        <arguments>
+            <argument name="standardDimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\DimensionalIndexer</argument>
+            <argument name="fallbackDimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\Indexer</argument>
         </arguments>
     </virtualType>
     <virtualType name="MateuszMesek\DocumentDataIndexQueue\Consumer\Sync" type="MateuszMesek\DocumentDataIndexQueue\Consumer">
         <arguments>
-            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexSync\DimensionalIndexer</argument>
+            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Consumer\Sync\DimensionalIndexer</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Consumer\Sync\DimensionalIndexer" type="MateuszMesek\DocumentDataIndexQueue\Consumer\DimensionalIndexer">
+        <arguments>
+            <argument name="standardDimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexSync\DimensionalIndexer</argument>
+            <argument name="fallbackDimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\Sync</argument>
         </arguments>
     </virtualType>
 </config>
