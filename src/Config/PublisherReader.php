@@ -36,14 +36,12 @@ class PublisherReader implements ReaderInterface
 
                 $topics[$topicName] = [
                     'topic' => $topicName,
-                    'disabled' => false,
-                    'connections' => [
-                        'amqp' => [
-                            'name' => 'amqp',
-                            'exchange' => 'magento',
-                            'disabled' => false,
-                        ]
-                    ]
+                    'connection' => [
+                        'name' => 'amqp',
+                        'exchange' => 'magento',
+                        'disabled' => false,
+                    ],
+                    'disabled' => false
                 ];
             }
         }

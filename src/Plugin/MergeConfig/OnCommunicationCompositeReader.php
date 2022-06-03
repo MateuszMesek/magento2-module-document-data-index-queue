@@ -6,7 +6,7 @@
 
 namespace MateuszMesek\DocumentDataIndexQueue\Plugin\MergeConfig;
 
-class OnPublisherXmlReader extends OnReader
+class OnCommunicationCompositeReader extends OnReader
 {
 
 }

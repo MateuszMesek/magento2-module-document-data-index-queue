@@ -17,13 +17,17 @@ class OnReader
 
     public function afterRead(
         ReaderInterface $reader,
-        array $result,
-        $scope = null
+        array           $result,
+                        $scope = null
     )
     {
-        return array_merge_recursive(
-            $result,
-            $this->reader->read($scope)
+        $results = [
+            $this->reader->read($scope),
+            $result
+        ];
+
+        return array_replace_recursive(
+            ...$results
         );
     }
 }
