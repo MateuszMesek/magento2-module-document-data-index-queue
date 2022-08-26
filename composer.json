@@ -6,6 +6,7 @@
         "magento/framework": "*",
         "magento/framework-message-queue": "*",
         "mateuszmesek-magento2/module-document-data-index-indexer": "*",
+        "mateuszmesek-magento2/module-document-data-index-mview": "*",
         "mateuszmesek-magento2/module-document-data-index-sync": "*",
         "mateuszmesek-magento2/module-document-data-index-queue-api": "*"
     },
