@@ -1,56 +1,56 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="MateuszMesek\DocumentDataIndexQueueApi\Data\MessageInterface" type="MateuszMesek\DocumentDataIndexQueue\Data\Message"/>
-    <preference for="MateuszMesek\DocumentDataIndexQueueApi\TopicNameResolverInterface" type="MateuszMesek\DocumentDataIndexQueue\TopicNameResolver"/>
-    <type name="MateuszMesek\DocumentDataIndexQueue\TopicNameResolver">
+    <preference for="MateuszMesek\DocumentDataIndexQueueApi\Model\Data\MessageInterface" type="MateuszMesek\DocumentDataIndexQueue\Model\Data\Message"/>
+    <preference for="MateuszMesek\DocumentDataIndexQueueApi\Model\TopicNameResolverInterface" type="MateuszMesek\DocumentDataIndexQueue\Model\TopicNameResolver"/>
+    <type name="MateuszMesek\DocumentDataIndexQueue\Model\TopicNameResolver">
         <arguments>
-            <argument name="documentNameResolver" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\DimensionResolver\DocumentNameResolver</argument>
+            <argument name="documentNameResolver" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\Model\DimensionResolver\DocumentNameResolver</argument>
         </arguments>
     </type>
-    <type name="MateuszMesek\DocumentDataIndexQueue\TopicNameResolverFactory">
+    <type name="MateuszMesek\DocumentDataIndexQueue\Model\TopicNameResolverFactory">
         <arguments>
-            <argument name="config" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Config</argument>
+            <argument name="config" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Config</argument>
         </arguments>
     </type>
-    <type name="MateuszMesek\DocumentDataIndexQueue\TopicNameResolver\AutoResolver">
+    <type name="MateuszMesek\DocumentDataIndexQueue\Model\TopicNameResolver\AutoResolver">
         <arguments>
-            <argument name="documentNameResolver" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\DimensionResolver\DocumentNameResolver</argument>
-            <argument name="storeIdResolver" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\DimensionResolver\StoreIdResolver</argument>
+            <argument name="documentNameResolver" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\Model\DimensionResolver\DocumentNameResolver</argument>
+            <argument name="storeIdResolver" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\Model\DimensionResolver\StoreIdResolver</argument>
         </arguments>
     </type>
-    <type name="MateuszMesek\DocumentDataIndexQueue\TopicNamesProviderFactory">
+    <type name="MateuszMesek\DocumentDataIndexQueue\Model\TopicNamesProviderFactory">
         <arguments>
-            <argument name="config" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Config</argument>
+            <argument name="config" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Config</argument>
         </arguments>
     </type>
     <!-- config -->
-    <type name="MateuszMesek\DocumentDataIndexQueue\Config">
+    <type name="MateuszMesek\DocumentDataIndexQueue\Model\Config">
         <arguments>
-            <argument name="data" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Config\Data</argument>
+            <argument name="data" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Config\Data</argument>
         </arguments>
     </type>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Config\Data" type="Magento\Framework\Config\Data">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Config\Data" type="Magento\Framework\Config\Data">
         <arguments>
-            <argument name="reader" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Config\Reader</argument>
+            <argument name="reader" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Config\Reader</argument>
             <argument name="cacheId" xsi:type="string">document_data_queue_config_cache</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Config\Reader" type="Magento\Framework\Config\Reader\Filesystem">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Config\Reader" type="Magento\Framework\Config\Reader\Filesystem">
         <arguments>
-            <argument name="converter" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Config\Converter</argument>
-            <argument name="schemaLocator" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Config\SchemaLocator</argument>
+            <argument name="converter" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Config\Converter</argument>
+            <argument name="schemaLocator" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Config\SchemaLocator</argument>
             <argument name="fileName" xsi:type="string">document_data_queue.xml</argument>
             <argument name="idAttributes" xsi:type="array">
                 <item name="/config/document" xsi:type="string">name</item>
             </argument>
         </arguments>
     </virtualType>
-    <type name="MateuszMesek\DocumentDataIndexQueue\Config\Converter">
+    <type name="MateuszMesek\DocumentDataIndexQueue\Model\Config\Converter">
         <arguments>
-            <argument name="documentProcessor" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Config\Converter\Document</argument>
+            <argument name="documentProcessor" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Config\Converter\Document</argument>
         </arguments>
     </type>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Config\SchemaLocator" type="Magento\Framework\Config\GenericSchemaLocator">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Config\SchemaLocator" type="Magento\Framework\Config\GenericSchemaLocator">
         <arguments>
             <argument name="moduleName" xsi:type="string">MateuszMesek_DocumentDataIndexQueue</argument>
             <argument name="schema" xsi:type="string">document_data_queue.xsd</argument>
@@ -61,29 +61,29 @@
     </type>
     <virtualType name="MateuszMesek\DocumentDataIndexQueue\Plugin\MergeConfig\OnCommunicationCompositeReader" type="MateuszMesek\DocumentDataIndexQueue\Plugin\MergeConfig\OnReader">
         <arguments>
-            <argument name="reader" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Config\CommunicationReader\Composite</argument>
+            <argument name="reader" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Config\CommunicationReader\Composite</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Config\CommunicationReader\Composite" type="MateuszMesek\DocumentDataIndexQueue\Config\CompositeReader">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Config\CommunicationReader\Composite" type="MateuszMesek\DocumentDataIndexQueue\Model\Config\CompositeReader">
         <arguments>
             <argument name="readers" xsi:type="array">
-                <item name="indexer" xsi:type="string">MateuszMesek\DocumentDataIndexQueue\Config\CommunicationReader\Indexer</item>
-                <item name="sync" xsi:type="string">MateuszMesek\DocumentDataIndexQueue\Config\CommunicationReader\Sync</item>
+                <item name="indexer" xsi:type="string">MateuszMesek\DocumentDataIndexQueue\Model\Config\CommunicationReader\Indexer</item>
+                <item name="sync" xsi:type="string">MateuszMesek\DocumentDataIndexQueue\Model\Config\CommunicationReader\Sync</item>
             </argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Config\CommunicationReader\Indexer" type="MateuszMesek\DocumentDataIndexQueue\Config\CommunicationReader">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Config\CommunicationReader\Indexer" type="MateuszMesek\DocumentDataIndexQueue\Model\Config\CommunicationReader">
         <arguments>
-            <argument name="config" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\Config</argument>
-            <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName\Indexer</argument>
-            <argument name="consumerType" xsi:type="string">MateuszMesek\DocumentDataIndexQueue\Consumer\Indexer</argument>
+            <argument name="config" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\Model\Config</argument>
+            <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Command\GetTopicName\Indexer</argument>
+            <argument name="consumerType" xsi:type="string">MateuszMesek\DocumentDataIndexQueue\Model\Consumer\Indexer</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Config\CommunicationReader\Sync" type="MateuszMesek\DocumentDataIndexQueue\Config\CommunicationReader">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Config\CommunicationReader\Sync" type="MateuszMesek\DocumentDataIndexQueue\Model\Config\CommunicationReader">
         <arguments>
-            <argument name="config" xsi:type="object">MateuszMesek\DocumentDataIndexSync\Config</argument>
-            <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName\Sync</argument>
-            <argument name="consumerType" xsi:type="string">MateuszMesek\DocumentDataIndexQueue\Consumer\Sync</argument>
+            <argument name="config" xsi:type="object">MateuszMesek\DocumentDataIndexSync\Model\Config</argument>
+            <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Command\GetTopicName\Sync</argument>
+            <argument name="consumerType" xsi:type="string">MateuszMesek\DocumentDataIndexQueue\Model\Consumer\Sync</argument>
         </arguments>
     </virtualType>
     <type name="Magento\Framework\MessageQueue\Publisher\Config\CompositeReader">
@@ -91,116 +91,116 @@
     </type>
     <virtualType name="MateuszMesek\DocumentDataIndexQueue\Plugin\MergeConfig\OnPublisherCompositeReader" type="MateuszMesek\DocumentDataIndexQueue\Plugin\MergeConfig\OnReader">
         <arguments>
-            <argument name="reader" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Config\PublisherReader\Composite</argument>
+            <argument name="reader" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Config\PublisherReader\Composite</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Config\PublisherReader\Composite" type="MateuszMesek\DocumentDataIndexQueue\Config\CompositeReader">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Config\PublisherReader\Composite" type="MateuszMesek\DocumentDataIndexQueue\Model\Config\CompositeReader">
         <arguments>
             <argument name="readers" xsi:type="array">
-                <item name="indexer" xsi:type="string">MateuszMesek\DocumentDataIndexQueue\Config\PublisherReader\Indexer</item>
-                <item name="sync" xsi:type="string">MateuszMesek\DocumentDataIndexQueue\Config\PublisherReader\Sync</item>
+                <item name="indexer" xsi:type="string">MateuszMesek\DocumentDataIndexQueue\Model\Config\PublisherReader\Indexer</item>
+                <item name="sync" xsi:type="string">MateuszMesek\DocumentDataIndexQueue\Model\Config\PublisherReader\Sync</item>
             </argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Config\PublisherReader\Indexer" type="MateuszMesek\DocumentDataIndexQueue\Config\PublisherReader">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Config\PublisherReader\Indexer" type="MateuszMesek\DocumentDataIndexQueue\Model\Config\PublisherReader">
         <arguments>
-            <argument name="config" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\Config</argument>
-            <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName\Indexer</argument>
+            <argument name="config" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\Model\Config</argument>
+            <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Command\GetTopicName\Indexer</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Config\PublisherReader\Sync" type="MateuszMesek\DocumentDataIndexQueue\Config\PublisherReader">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Config\PublisherReader\Sync" type="MateuszMesek\DocumentDataIndexQueue\Model\Config\PublisherReader">
         <arguments>
-            <argument name="config" xsi:type="object">MateuszMesek\DocumentDataIndexSync\Config</argument>
-            <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName\Sync</argument>
+            <argument name="config" xsi:type="object">MateuszMesek\DocumentDataIndexSync\Model\Config</argument>
+            <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Command\GetTopicName\Sync</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName\Indexer" type="MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Command\GetTopicName\Indexer" type="MateuszMesek\DocumentDataIndexQueue\Model\Command\GetTopicName">
         <arguments>
             <argument name="namespace" xsi:type="string">document_data.indexer</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName\Sync" type="MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Command\GetTopicName\Sync" type="MateuszMesek\DocumentDataIndexQueue\Model\Command\GetTopicName">
         <arguments>
             <argument name="namespace" xsi:type="string">document_data.sync</argument>
         </arguments>
     </virtualType>
     <!-- producer -->
-    <type name="MateuszMesek\DocumentDataIndexIndexer\Action">
+    <type name="MateuszMesek\DocumentDataIndexIndexer\Model\Action">
         <arguments>
-            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\Indexer</argument>
+            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer\Indexer</argument>
         </arguments>
     </type>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\Indexer" type="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer\Indexer" type="MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer">
         <arguments>
-            <argument name="publisher" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Publisher\Indexer</argument>
+            <argument name="publisher" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Publisher\Indexer</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Publisher\Indexer" type="MateuszMesek\DocumentDataIndexQueue\Publisher">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Publisher\Indexer" type="MateuszMesek\DocumentDataIndexQueue\Model\Publisher">
         <arguments>
-            <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName\Indexer</argument>
+            <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Command\GetTopicName\Indexer</argument>
         </arguments>
     </virtualType>
-    <type name="MateuszMesek\DocumentDataIndexMview\Action">
+    <type name="MateuszMesek\DocumentDataIndexMview\Model\Action">
         <arguments>
-            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\IndexerMview</argument>
+            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer\IndexerMview</argument>
         </arguments>
     </type>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\IndexerMview" type="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer\IndexerMview" type="MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer">
         <arguments>
-            <argument name="publisher" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Publisher\Indexer</argument>
+            <argument name="publisher" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Publisher\Indexer</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexSync\IndexerAction">
+    <virtualType name="MateuszMesek\DocumentDataIndexSync\Model\IndexerAction">
         <arguments>
-            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\Sync</argument>
+            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer\Sync</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\Sync" type="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer\Sync" type="MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer">
         <arguments>
-            <argument name="publisher" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Publisher\Sync</argument>
+            <argument name="publisher" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Publisher\Sync</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Publisher\Sync" type="MateuszMesek\DocumentDataIndexQueue\Publisher">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Publisher\Sync" type="MateuszMesek\DocumentDataIndexQueue\Model\Publisher">
         <arguments>
-            <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName\Sync</argument>
+            <argument name="getTopicName" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Command\GetTopicName\Sync</argument>
         </arguments>
     </virtualType>
-    <virtualType name="KMK\DocumentDataIndexSync\MviewAction">
+    <virtualType name="KMK\DocumentDataIndexSync\Model\MviewAction">
         <arguments>
-            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\SyncMview</argument>
+            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer\SyncMview</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\SyncMview" type="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer\SyncMview" type="MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer">
         <arguments>
-            <argument name="publisher" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Publisher\Sync</argument>
+            <argument name="publisher" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Publisher\Sync</argument>
         </arguments>
     </virtualType>
     <!-- consumer -->
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Consumer\DimensionalIndexer" type="MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\Fallback">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Consumer\DimensionalIndexer" type="MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer\Fallback">
         <arguments>
             <argument name="message" xsi:type="string">Consumer was fail. Message will be published again.</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Consumer\Indexer" type="MateuszMesek\DocumentDataIndexQueue\Consumer">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Consumer\Indexer" type="MateuszMesek\DocumentDataIndexQueue\Model\Consumer">
         <arguments>
-            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Consumer\Indexer\DimensionalIndexer</argument>
+            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Consumer\Indexer\DimensionalIndexer</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Consumer\Indexer\DimensionalIndexer" type="MateuszMesek\DocumentDataIndexQueue\Consumer\DimensionalIndexer">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Consumer\Indexer\DimensionalIndexer" type="MateuszMesek\DocumentDataIndexQueue\Model\Consumer\DimensionalIndexer">
         <arguments>
-            <argument name="standardDimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\DimensionalIndexer</argument>
-            <argument name="fallbackDimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\Indexer</argument>
+            <argument name="standardDimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexIndexer\Model\DimensionalIndexer</argument>
+            <argument name="fallbackDimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer\Indexer</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Consumer\Sync" type="MateuszMesek\DocumentDataIndexQueue\Consumer">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Consumer\Sync" type="MateuszMesek\DocumentDataIndexQueue\Model\Consumer">
         <arguments>
-            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Consumer\Sync\DimensionalIndexer</argument>
+            <argument name="dimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\Consumer\Sync\DimensionalIndexer</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Consumer\Sync\DimensionalIndexer" type="MateuszMesek\DocumentDataIndexQueue\Consumer\DimensionalIndexer">
+    <virtualType name="MateuszMesek\DocumentDataIndexQueue\Model\Consumer\Sync\DimensionalIndexer" type="MateuszMesek\DocumentDataIndexQueue\Model\Consumer\DimensionalIndexer">
         <arguments>
-            <argument name="standardDimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexSync\DimensionalIndexer</argument>
-            <argument name="fallbackDimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer\Sync</argument>
+            <argument name="standardDimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexSync\Model\DimensionalIndexer</argument>
+            <argument name="fallbackDimensionalIndexer" xsi:type="object">MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer\Sync</argument>
         </arguments>
     </virtualType>
 </config>

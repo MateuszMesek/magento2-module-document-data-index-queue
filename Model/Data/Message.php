@@ -1,25 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace MateuszMesek\DocumentDataIndexQueue\Data;
+namespace MateuszMesek\DocumentDataIndexQueue\Model\Data;
 
-use MateuszMesek\DocumentDataIndexQueueApi\Data\MessageInterface;
+use MateuszMesek\DocumentDataIndexQueueApi\Model\Data\MessageInterface;
 
 class Message implements MessageInterface
 {
-    private array $dimensions;
-    private array $entityIds;
-
     /**
      * @param array $dimensions
      * @param array $entityIds
      */
     public function __construct(
-        array $dimensions = [],
-        array $entityIds = []
+        private array $dimensions = [],
+        private array $entityIds = []
     )
     {
-        $this->dimensions = $dimensions;
-        $this->entityIds = $entityIds;
     }
 
     public function getDimensions(): array

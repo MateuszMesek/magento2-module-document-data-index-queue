@@ -1,32 +1,26 @@
 <?php declare(strict_types=1);
 
-namespace MateuszMesek\DocumentDataIndexQueue;
+namespace MateuszMesek\DocumentDataIndexQueue\Model;
 
 use InvalidArgumentException;
 use Magento\Framework\ObjectManagerInterface;
-use MateuszMesek\DocumentDataIndexQueue\TopicNameResolver\AutoResolver;
-use MateuszMesek\DocumentDataIndexQueueApi\TopicNameResolverInterface;
-use MateuszMesek\DocumentDataIndexQueueApi\Config\TopicNameResolverInterface as ConfigInterface;
+use MateuszMesek\DocumentDataIndexQueue\Model\TopicNameResolver\AutoResolver;
+use MateuszMesek\DocumentDataIndexQueueApi\Model\TopicNameResolverInterface;
+use MateuszMesek\DocumentDataIndexQueueApi\Model\Config\TopicNameResolverInterface as ConfigInterface;
 
 class TopicNameResolverFactory
-{
-    private ConfigInterface $config;
-    private ObjectManagerInterface $objectManager;
-    private string $defaultTopicNameResolver;
+{/**/
     /**
      * @var TopicNameResolverInterface[]
      */
     private array $instances = [];
 
     public function __construct(
-        ConfigInterface        $config,
-        ObjectManagerInterface $objectManager,
-        string $defaultTopicNameResolver = AutoResolver::class
+        private readonly ConfigInterface        $config,
+        private readonly ObjectManagerInterface $objectManager,
+        private readonly string                 $defaultTopicNameResolver = AutoResolver::class
     )
     {
-        $this->config = $config;
-        $this->objectManager = $objectManager;
-        $this->defaultTopicNameResolver = $defaultTopicNameResolver;
     }
 
     public function create(string $documentName): TopicNameResolverInterface

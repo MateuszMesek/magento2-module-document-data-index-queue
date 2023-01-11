@@ -1,27 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace MateuszMesek\DocumentDataIndexQueue\Config;
+namespace MateuszMesek\DocumentDataIndexQueue\Model\Config;
 
 use Magento\Framework\Config\ReaderInterface;
-use MateuszMesek\DocumentDataApi\Config\DocumentNamesInterface as ConfigInterface;
-use MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName;
-use MateuszMesek\DocumentDataIndexQueue\TopicNamesProviderFactory;
+use MateuszMesek\DocumentDataApi\Model\Config\DocumentNamesInterface as ConfigInterface;
+use MateuszMesek\DocumentDataIndexQueue\Model\Command\GetTopicName;
+use MateuszMesek\DocumentDataIndexQueue\Model\TopicNamesProviderFactory;
 
 class PublisherReader implements ReaderInterface
 {
-    private ConfigInterface $config;
-    private TopicNamesProviderFactory $topicNamesProviderFactory;
-    private GetTopicName $getTopicName;
-
     public function __construct(
-        ConfigInterface           $config,
-        TopicNamesProviderFactory $topicNamesProviderFactory,
-        GetTopicName              $getTopicName
+        private readonly ConfigInterface           $config,
+        private readonly TopicNamesProviderFactory $topicNamesProviderFactory,
+        private readonly GetTopicName              $getTopicName
     )
     {
-        $this->config = $config;
-        $this->topicNamesProviderFactory = $topicNamesProviderFactory;
-        $this->getTopicName = $getTopicName;
     }
 
     public function read($scope = null)

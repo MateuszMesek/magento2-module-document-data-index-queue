@@ -1,20 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace MateuszMesek\DocumentDataIndexQueue;
+namespace MateuszMesek\DocumentDataIndexQueue\Model;
 
 use Magento\Framework\Config\DataInterface;
-use MateuszMesek\DocumentDataIndexQueueApi\Config\TopicNameResolverInterface;
-use MateuszMesek\DocumentDataIndexQueueApi\Config\TopicNamesProviderInterface;
+use MateuszMesek\DocumentDataIndexQueueApi\Model\Config\TopicNameResolverInterface;
+use MateuszMesek\DocumentDataIndexQueueApi\Model\Config\TopicNamesProviderInterface;
 
 class Config implements TopicNamesProviderInterface, TopicNameResolverInterface
 {
-    private DataInterface $data;
-
     public function __construct(
-        DataInterface $data
+        private readonly DataInterface $data
     )
     {
-        $this->data = $data;
     }
 
     public function getTopicNamesProvider(string $documentName): ?string

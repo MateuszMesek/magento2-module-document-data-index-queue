@@ -1,24 +1,21 @@
 <?php declare(strict_types=1);
 
-namespace MateuszMesek\DocumentDataIndexQueue;
+namespace MateuszMesek\DocumentDataIndexQueue\Model;
 
 use InvalidArgumentException;
 use Magento\Framework\ObjectManagerInterface;
-use MateuszMesek\DocumentDataIndexQueueApi\Config\TopicNamesProviderInterface as ConfigInterface;
-use MateuszMesek\DocumentDataIndexQueueApi\TopicNamesProviderInterface;
+use MateuszMesek\DocumentDataIndexQueue\Model\Config;
+use MateuszMesek\DocumentDataIndexQueue\Model\TopicNamesProvider;
+use MateuszMesek\DocumentDataIndexQueueApi\Model\Config\TopicNamesProviderInterface as ConfigInterface;
+use MateuszMesek\DocumentDataIndexQueueApi\Model\TopicNamesProviderInterface;
 
 class TopicNamesProviderFactory
 {
-    private Config $config;
-    private ObjectManagerInterface $objectManager;
-
     public function __construct(
-        ConfigInterface        $config,
-        ObjectManagerInterface $objectManager
+        private readonly ConfigInterface        $config,
+        private readonly ObjectManagerInterface $objectManager
     )
     {
-        $this->config = $config;
-        $this->objectManager = $objectManager;
     }
 
     public function create(string $documentName): TopicNamesProviderInterface

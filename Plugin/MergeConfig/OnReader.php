@@ -6,13 +6,10 @@ use Magento\Framework\Config\ReaderInterface;
 
 class OnReader
 {
-    private ReaderInterface $reader;
-
     public function __construct(
-        ReaderInterface $reader
+        private readonly ReaderInterface $reader
     )
     {
-        $this->reader = $reader;
     }
 
     public function afterRead(

@@ -1,32 +1,23 @@
 <?php declare(strict_types=1);
 
-namespace MateuszMesek\DocumentDataIndexQueue\Config;
+namespace MateuszMesek\DocumentDataIndexQueue\Model\Config;
 
 use Magento\Framework\Communication\ConfigInterface as CommunicationConfigInterface;
 use Magento\Framework\Config\ReaderInterface;
-use MateuszMesek\DocumentDataApi\Config\DocumentNamesInterface as ConfigInterface;
-use MateuszMesek\DocumentDataIndexQueue\Command\GetTopicName;
-use MateuszMesek\DocumentDataIndexQueue\TopicNamesProviderFactory;
-use MateuszMesek\DocumentDataIndexQueueApi\Data\MessageInterface;
+use MateuszMesek\DocumentDataApi\Model\Config\DocumentNamesInterface as ConfigInterface;
+use MateuszMesek\DocumentDataIndexQueue\Model\Command\GetTopicName;
+use MateuszMesek\DocumentDataIndexQueue\Model\TopicNamesProviderFactory;
+use MateuszMesek\DocumentDataIndexQueueApi\Model\Data\MessageInterface;
 
 class CommunicationReader implements ReaderInterface
 {
-    private ConfigInterface $config;
-    private TopicNamesProviderFactory $topicNamesProviderFactory;
-    private GetTopicName $getTopicName;
-    private string $consumerType;
-
     public function __construct(
-        ConfigInterface           $config,
-        TopicNamesProviderFactory $topicNamesProviderFactory,
-        GetTopicName              $getTopicName,
-        string                    $consumerType
+        private readonly ConfigInterface           $config,
+        private readonly TopicNamesProviderFactory $topicNamesProviderFactory,
+        private readonly GetTopicName              $getTopicName,
+        private readonly string                    $consumerType
     )
     {
-        $this->config = $config;
-        $this->topicNamesProviderFactory = $topicNamesProviderFactory;
-        $this->getTopicName = $getTopicName;
-        $this->consumerType = $consumerType;
     }
 
     public function read($scope = null): array

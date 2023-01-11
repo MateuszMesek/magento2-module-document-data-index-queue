@@ -3,12 +3,13 @@
     "description": "N/A",
     "type": "magento2-module",
     "require": {
+        "php": ">=8.1",
         "magento/framework": "*",
         "magento/framework-message-queue": "*",
-        "mateuszmesek-magento2/module-document-data-index-indexer": "*",
-        "mateuszmesek-magento2/module-document-data-index-mview": "*",
-        "mateuszmesek-magento2/module-document-data-index-sync": "*",
-        "mateuszmesek-magento2/module-document-data-index-queue-api": "*"
+        "mateuszmesek-magento2/module-document-data-index-indexer": "^1.0",
+        "mateuszmesek-magento2/module-document-data-index-mview": "^1.0",
+        "mateuszmesek-magento2/module-document-data-index-sync": "^1.0",
+        "mateuszmesek-magento2/module-document-data-index-queue-api": "^1.0"
     },
     "license": [
         "MIT"
@@ -18,7 +19,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "MateuszMesek\\DocumentDataIndexQueue\\": "src"
+            "MateuszMesek\\DocumentDataIndexQueue\\": ""
         }
     }
 }

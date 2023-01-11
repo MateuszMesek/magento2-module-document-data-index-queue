@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace MateuszMesek\DocumentDataIndexQueue\Config;
+namespace MateuszMesek\DocumentDataIndexQueue\Model\Config;
 
 use DOMNode;
 use Magento\Framework\Config\ConverterInterface;
@@ -9,16 +9,11 @@ use MateuszMesek\Framework\Config\Converter\ProcessorInterface;
 
 class Converter implements ConverterInterface
 {
-    private ItemsResolver $itemsResolver;
-    private ProcessorInterface $documentProcessor;
-
     public function __construct(
-        ItemsResolver $itemsResolver,
-        ProcessorInterface $documentProcessor
+        private readonly ItemsResolver      $itemsResolver,
+        private readonly ProcessorInterface $documentProcessor
     )
     {
-        $this->itemsResolver = $itemsResolver;
-        $this->documentProcessor = $documentProcessor;
     }
 
     public function convert($source): array

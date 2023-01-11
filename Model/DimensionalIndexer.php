@@ -1,25 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace MateuszMesek\DocumentDataIndexQueue;
+namespace MateuszMesek\DocumentDataIndexQueue\Model;
 
 use Magento\Framework\Indexer\DimensionalIndexerInterface;
-use MateuszMesek\DocumentDataIndexQueueApi\PublisherInterface;
+use MateuszMesek\DocumentDataIndexQueueApi\Model\PublisherInterface;
 use Psr\Log\LoggerInterface;
 use Throwable;
 use Traversable;
 
 class DimensionalIndexer implements DimensionalIndexerInterface
 {
-    private LoggerInterface $logger;
-    private PublisherInterface $publisher;
-
     public function __construct(
-        LoggerInterface $logger,
-        PublisherInterface $publisher
+        private readonly LoggerInterface    $logger,
+        private readonly PublisherInterface $publisher
     )
     {
-        $this->logger = $logger;
-        $this->publisher = $publisher;
     }
 
     public function executeByDimensions(array $dimensions, Traversable $entityIds)

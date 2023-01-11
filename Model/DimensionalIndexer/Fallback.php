@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace MateuszMesek\DocumentDataIndexQueue\DimensionalIndexer;
+namespace MateuszMesek\DocumentDataIndexQueue\Model\DimensionalIndexer;
 
 use Magento\Framework\Indexer\DimensionalIndexerInterface;
 use Psr\Log\LoggerInterface;
@@ -10,22 +10,13 @@ use Traversable;
 
 class Fallback implements DimensionalIndexerInterface
 {
-    private LoggerInterface $logger;
-    private DimensionalIndexerInterface $standardDimensionalIndexer;
-    private DimensionalIndexerInterface $fallbackDimensionalIndexer;
-    private string $message;
-
     public function __construct(
-        LoggerInterface $logger,
-        DimensionalIndexerInterface $standardDimensionalIndexer,
-        DimensionalIndexerInterface $fallbackDimensionalIndexer,
-        string $message
+        private readonly LoggerInterface             $logger,
+        private readonly DimensionalIndexerInterface $standardDimensionalIndexer,
+        private readonly DimensionalIndexerInterface $fallbackDimensionalIndexer,
+        private readonly string                      $message
     )
     {
-        $this->logger = $logger;
-        $this->standardDimensionalIndexer = $standardDimensionalIndexer;
-        $this->fallbackDimensionalIndexer = $fallbackDimensionalIndexer;
-        $this->message = $message;
     }
 
     public function executeByDimensions(array $dimensions, Traversable $entityIds)
